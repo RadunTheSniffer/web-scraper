@@ -5,8 +5,8 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # Scrape data
-    data = extractor.scraped_data()
-    
+    data = extractor.scraped_data
+    print(f"Scraped Data: {data[:100]}...")
     
     html_content = f'''
     <!DOCTYPE html>
@@ -18,12 +18,13 @@ def home():
     </head>
     <body>
         <h1>Scraper Output</h1>
-        <p>{data}</p>  <!-- Data output -->
+        <pre>{data}</pre>  <!-- Data output -->
     </body>
     </html>
     '''
     
-    return render_template_string(html_content)
+    return render_template_string(html_content, data=data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
