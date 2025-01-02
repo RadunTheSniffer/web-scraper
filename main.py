@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     # Scrape data
     data = extractor.scraped_data
-    print(f"Scraped Data: {data[:100]}...")
+    
     
     html_content = f'''
     <!DOCTYPE html>
@@ -18,7 +18,9 @@ def home():
     </head>
     <body>
         <h1>Scraper Output</h1>
-        <pre>{data}</pre>  <!-- Data output -->
+        <p>
+        {data}
+        </p>  <!-- Data output -->
     </body>
     </html>
     '''
