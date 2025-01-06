@@ -1,32 +1,18 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 import extractor
 app = Flask(__name__)
 
 @app.route('/')
-def home():
+
+
+
+@app.route('/output')
+def output():
     # Scrape data
     data = extractor.scraped_data
+    return render_template("index.html",data=data)
     
     
-    html_content = f'''
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Scraper Output</title>
-    </head>
-    <body>
-        <h1>Scraper Output</h1>
-        <p>
-        {data}
-        </p>  <!-- Data output -->
-    </body>
-    </html>
-    '''
     
-    return render_template_string(html_content, data=data)
-
-
 if __name__ == '__main__':
     app.run(debug=True)
