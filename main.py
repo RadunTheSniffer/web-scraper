@@ -10,8 +10,10 @@ app = Flask(__name__)
 def output():
     # Scrape data
     data1 = sentiment.output
-    print(data1)
-    #return render_template("index.html",data=data1)
+    #data2 = sentiment.world_sentiment_value
+    return render_template("index.html",data=data1
+                           )
+    
     
     
     

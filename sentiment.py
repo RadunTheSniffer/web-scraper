@@ -58,5 +58,12 @@ def predict_sentiment(texts):
 #]
 data = extractor.scraped_data
 output =[]
+world_sentiment_value = 0
 for data, sentiment in zip(data, predict_sentiment(data)):
-    output = (f"Text: {data}\nSentiment: {sentiment}\n")
+    output.append(f"Text: {data}\nSentiment: {sentiment}\n")
+    #if sentiment == "Positive, Very Positive":
+    #   world_sentiment_value += 1  
+    #if sentiment == "Negative, Very Negative":
+    #   world_sentiment_value -= 1
+    #else:
+    #    continue
