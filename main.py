@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import extractor
+import sentiment
 app = Flask(__name__)
 
 @app.route('/')
@@ -9,8 +9,9 @@ app = Flask(__name__)
 @app.route('/output')
 def output():
     # Scrape data
-    data = extractor.scraped_data
-    return render_template("index.html",data=data)
+    data1 = sentiment.output
+    print(data1)
+    #return render_template("index.html",data=data1)
     
     
     
