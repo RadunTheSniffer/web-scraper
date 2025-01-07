@@ -15,6 +15,41 @@ def predict_sentiment(texts):
     sentiment_map = {0: "Very Negative", 1: "Negative", 2: "Neutral", 3: "Positive", 4: "Very Positive"}
     return [sentiment_map[p] for p in torch.argmax(probabilities, dim=-1).tolist()]
 
+def analyze(link):
+    data = extractor.scrape_data(link)
+    output = []
+    for text, sentiment in zip(data, predict_sentiment(data)):
+        output.append(f"Text: {text}\nSentiment: {sentiment}\n")
+    return output
+
+
+
+
+
+
+
+#data = extractor.scraped_data
+#output =[]
+#world_sentiment_value = 0
+#for data, sentiment in zip(data, predict_sentiment(data)):
+    #output.append(f"Text: {data}\nSentiment: {sentiment}\n")
+    #if sentiment == "Positive, Very Positive":
+    #   world_sentiment_value += 1  
+    #if sentiment == "Negative, Very Negative":
+    #   world_sentiment_value -= 1
+    #else:
+    #    continue
+
+
+
+
+
+
+
+
+
+
+
 #texts = [
     # English
     "I absolutely love the new design of this app!", "The customer service was disappointing.", "The weather is fine, nothing special.",
@@ -56,14 +91,3 @@ def predict_sentiment(texts):
     # Swiss German
     "Ich find dä Service i de Beiz mega guet!", "Däs Esä het mir nöd gfalle.", "D Wätter hüt isch so naja."
 #]
-data = extractor.scraped_data
-output =[]
-world_sentiment_value = 0
-for data, sentiment in zip(data, predict_sentiment(data)):
-    output.append(f"Text: {data}\nSentiment: {sentiment}\n")
-    #if sentiment == "Positive, Very Positive":
-    #   world_sentiment_value += 1  
-    #if sentiment == "Negative, Very Negative":
-    #   world_sentiment_value -= 1
-    #else:
-    #    continue
