@@ -8,6 +8,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
 def predict_sentiment(texts):
+    #print("Input texts:", texts)
     inputs = tokenizer(texts, return_tensors="pt", truncation=True, padding=True, max_length=512)
     with torch.no_grad():
         outputs = model(**inputs)
@@ -17,9 +18,11 @@ def predict_sentiment(texts):
 
 def analyze(link):
     data = extractor.scrape_data(link)
+    #print("Scraped data:", data)
     output = []
     for text, sentiment in zip(data, predict_sentiment(data)):
         output.append(f"Text: {text}\nSentiment: {sentiment}\n")
+    #print("Output:", output)
     return output
 
 
