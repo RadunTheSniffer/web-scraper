@@ -3,10 +3,9 @@ import sentiment
 app = Flask(__name__)
 
 
-@app.route('/scrape', methods=['POST'])
+@app.route('/scraper', methods=['POST'])
 def scraper():
-    link = request.get(link)
-    data = request.json
+    data = request.get_json()
     link = data.get('link')
     result = sentiment.analyze(link)
     return jsonify(result) 
