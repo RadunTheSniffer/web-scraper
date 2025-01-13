@@ -1,6 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
-import extractor
+#import extractor
+#import classification
 
 
 model_name = "tabularisai/multilingual-sentiment-analysis"
@@ -9,18 +10,20 @@ model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
 def predict_sentiment(texts):
     #print("Input texts:", texts)
-    inputs = tokenizer(texts, return_tensors="pt", truncation=True, padding=True, max_length=512)
+    inputs = tokenizer(texts, return_tensors="pt", truncation=True, padding=True, max_length=2048)
     with torch.no_grad():
         outputs = model(**inputs)
     probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1)
     sentiment_map = {0: "Very Negative", 1: "Negative", 2: "Neutral", 3: "Positive", 4: "Very Positive"}
     return [sentiment_map[p] for p in torch.argmax(probabilities, dim=-1).tolist()]
 
-def analyze(link):
-    data = extractor.scrape_data(link)
-    #print("Scraped data:", data)
+def analyze(classify):
+    #data = extractor.scrape_data(link)
+    #data = classification.filter_redundant_texts(link)                     debugging statements
+    #data = classify [0]
+    #print("Scraped data:", classify)
     output = []
-    for text, sentiment in zip(data, predict_sentiment(data)):
+    for text, sentiment in zip(classify, predict_sentiment(classify)):
         output.append(f"Text: {text}\nSentiment: {sentiment}\n")
     #print("Output:", output)
     return output
